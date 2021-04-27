@@ -1,0 +1,79 @@
+<body style="background: #24292e">
+<div>
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">Autómata | Daniel Matuz | U P W I N D</a>
+  </nav>
+</div>
+<div class="content" role="main">
+  <!-- Terminal -->
+  <h5 style="color: #f0f3f6; text-align: center; margin-top: -60px">Escriba una de las siguientes palabras reservadas</h5>
+  <div class="terminal" style="margin-top: 20px">
+    <textarea style="background: transparent!important; border: none; color: #000; min-height: 120px"
+              class="form-control" type="text" value="{{contenido}}" readonly></textarea>
+  </div>
+
+</div>
+
+<div class="w-75 mx-auto">
+  <div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingTwo" >
+        <h2 class="mb-0" >
+          <button (click)="terminalOpen()" *ngIf="!terminal" style="text-align: center!important;" class="form-control btn btn-link btn-block text-left collapsed"
+                  type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                  aria-controls="collapseTwo">
+            Abrir terminal
+          </button>
+          <button (click)="terminalOpen()" *ngIf="terminal" style="text-align: center!important;" class="form-control btn btn-link btn-block text-left collapsed"
+                  type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                  aria-controls="collapseTwo">
+            Cerrar terminal
+          </button>
+        </h2>
+      </div>
+      <div  id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body" style="background: #24292e!important; border: none">
+
+          <div class="container">
+            <div class="row">
+              <div class="col" style="padding-right: 0px!important;">
+                <button class="btn btn-primary" *ngIf="!status" style=" padding: 3px; background: #f0f3f6; width: 160px!important; border-radius: 5px; color: #24292e; text-align: center">compilar</button>
+                <button class="btn btn-primary" *ngIf="status" (click)="main(terminalData.value)" style=" padding: 3px; background: #f0f3f6; width: 160px!important; border-radius: 5px; color: #24292e; text-align: center">recompilar</button>
+              </div>
+              <div class="col">
+                <div *ngIf="status && terminalData.value != ''">
+                  <h6 style="color: #f0f3f6">Sin errores <span class="badge badge-secondary" style="background: mediumseagreen">OK</span></h6>
+                </div>                <div *ngIf="!status && terminalData.value != ''">
+                <h6 style="color: #f0f3f6">Error de léxico <span class="badge badge-secondary" style="background: indianred">ERR</span></h6>
+              </div>
+              </div>
+              <div class="col">
+                <p style="color: #f0f3f6" *ngIf="!status && terminalData.value != '' || status && terminalData.value != ''">Tiempo de ejecucón en: {{timeExecute}} ms</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="terminalConsole" style="width: 100%!important;">
+            <textarea (keyup)="main(terminalData.value)" #terminalData spellcheck=”false“ class="mx-auto"
+                      style="padding-left: 20px; align-content: center; background: transparent!important; border: none; color: #f0f3f6; min-height: 170px; width: 100%; outline: none"></textarea>
+            <div *ngIf="!status && terminalData.value != ''">
+              <p style="padding-left: 20px;color: indianred">{{err}} <br> código de error: {{err.length}}</p>
+            </div>
+            <div *ngIf="status">
+              <p style="padding-left: 20px;color: mediumseagreen">El valor ingresado es una palabra reservada, estatus: OK</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Automata ISAAC -->
+
+
+
+</body>
